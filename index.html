@@ -95,14 +95,24 @@ padding-left: 80px;
         }
 
 
-        .operations, .digits {
+        .operations {
             margin: 20px 0;
             display: flex;
             flex-wrap: wrap;
             justify-content: center;
             gap: 12px;
         }
-        .operation, .digit {
+
+.digits {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: nowrap;
+            justify-content: center;
+            gap: 12px;
+        }
+
+
+        .operation {
             padding: 10px 15px;
             border-radius: 10px;
             border:1px solid rgba(124,108,255,0.5);            
@@ -112,6 +122,19 @@ padding-left: 80px;
             font-size: 1em;
             user-select: none;
         }
+
+.digit {
+            padding: 20px 20px;
+            border-radius: 10px;
+            border:1px solid rgba(124,108,255,0.5);            
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            user-select: none;
+
+        }
+
         .operation:hover, .digit:hover {
         background:linear-gradient(45deg,rgba(124,108,255,0.10),
         rgba(255,122,182,0.10));
@@ -597,4 +620,5 @@ updatePerfectImperfectVisibility();
     </script>
 </body>
 </html>
+
 
