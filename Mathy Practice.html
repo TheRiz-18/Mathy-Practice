@@ -1,0 +1,599 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mathy — Practice</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #e6d9ff, #f3e7ff);
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        .container {
+            width: 75%;
+            max-width: 600px;
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            padding: 20px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+        }
+        .header {
+            background: linear-gradient(to bottom left,#3c1053, #ad5389, #3c1053);
+            color: white;
+
+            padding: 15px;
+            border-radius: 19px;
+            margin-bottom: 0px;
+        }
+        .logo {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    width: 91px; 
+    height: 91px; 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    border-radius: 80px;
+ }
+
+.logo img {
+    max-width: 100%; 
+    max-height: 100%;   
+     display: block;    }
+
+        
+        .header h1 {
+            font-size: 1.8em;
+    text-align: left;
+padding-left: 80px;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-family: asimovian;
+
+        }
+        .header p {
+            margin: 5px 0;
+    text-align: left;
+padding-left: 80px;
+            font-size: 0.8em;
+            font-family: Dancing Script;
+
+        }
+
+.header1 {
+            background: linear-gradient(to bottom left,#3c1053, #ad5389, #3c1053);
+            color: white;
+
+            padding: 15px;
+            border-radius: 19px;
+            margin-bottom: 0px;
+        }
+                .header1 h1 {
+            font-size: 1.8em;
+    text-align: left;
+padding-left: 80px;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-family: asimovian;
+
+        }
+        .header1 p {
+            margin: 5px 0;
+    text-align: left;
+padding-left: 80px;
+            font-size: 0.8em;
+            font-family: Dancing Script;
+
+        }
+
+
+        .operations, .digits {
+            margin: 20px 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 12px;
+        }
+        .operation, .digit {
+            padding: 10px 15px;
+            border-radius: 10px;
+            border:1px solid rgba(124,108,255,0.5);            
+            cursor: pointer;
+            background: #fff;
+            transition: all 0.3s ease;
+            font-size: 1em;
+            user-select: none;
+        }
+        .operation:hover, .digit:hover {
+        background:linear-gradient(45deg,rgba(124,108,255,0.10),
+        rgba(255,122,182,0.10));
+        transform: scale(1.05);
+        }
+        .operation.selected, .digit.selected {
+        background:linear-gradient(45deg,rgba(124,108,255,0.25),
+        rgba(255,122,182,0.25));
+        border:1px solid rgba(124,108,255,0.60);           
+        color: black;
+        }
+
+             .check {
+            padding: 10px 15px;
+            border-radius: 10px;
+            cursor: pointer;
+        background:linear-gradient(45deg,rgba(124,108,255,0.10),
+        rgba(255,122,182,0.10));
+        border:1px solid rgba(124,108,255,0.60);            transition: all 0.3s ease;
+            font-size: 1em;
+            user-select: none;
+        }
+               .check:hover {
+        background:linear-gradient(45deg,rgba(124,108,255,0.25),
+        rgba(255,122,182,0.25));
+        transform: scale(1.05);
+        }
+              .check.selected {
+        background:linear-gradient(45deg,rgba(124,108,255,0.25),
+        rgba(255,122,182,0.25));
+        border:1px solid rgba(124,108,255,0.60);           
+        color: black;
+        }
+
+
+
+        .perfect-imperfect {
+            display: none;
+            margin: 20px 0;
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+        }
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            background: rgba(179, 136, 255, 0.5);
+            color: black;
+            font-size: 1em;
+            transition: all 0.3s ease;
+            margin: 5px;
+        }
+        .btn:hover {
+            background: #8e66cc;
+            color: white;
+            transform: scale(1.05);
+        }
+        .perfect-imperfect .btn {
+            background: white;
+            border: 1px solid rgba(124, 108, 255, 0.50); 
+            color: #b388ff;
+            font-family: Comic Sans MS;
+
+        }
+        .perfect-imperfect .btn.selected {
+            background: linear-gradient(90deg, rgba(124, 108, 255, 0.36), 
+            rgba(255, 122, 182, 0.36));
+            border: 1px solid rgba(124, 108, 255, 0.50);            
+            color: black;
+            font-family: Comic Sans MS;
+
+        }
+        .question-box {
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.2);
+            display: none;
+        }
+        .question {
+            font-size: 1.5em;
+            margin: 15px 0;
+        }
+        .answer-input {
+            padding: 10px;
+            font-size: 1em;
+            margin: 15px;
+            width: 120px;
+            border: 2px solid #b388ff;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .timer {
+            font-size: 1.2em;
+            margin: 15px 0;
+            color: #8e66cc;
+        }
+        .footer {
+            margin: 20px 0;
+            color: #555;
+            font-size: 0.9em;
+        }
+        .tip {
+            margin: 20px 0;
+            font-size: 0.9em;
+            color: #666;
+        }
+        .hidden {
+            display: none;
+        }
+        @media (max-width: 600px) {
+            .container {
+                width: 95%;
+                padding: 15px;
+            }
+            .header h1 {
+                font-size: 1.8em;
+            }
+            .header p {
+                font-size: 0.8em;
+            }
+            .operation, .digit, .btn {
+                padding: 8px 12px;
+                font-size: 0.9em;
+            }
+            .answer-input {
+                width: 100px;
+            }
+            .logo {
+                width: 35px;
+                height: 35px;
+                font-size: 1.2em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="homepage">
+            <div class="header">
+                <div class="logo">
+    <img src="E:\IBPS/Ilam Kalvi.png" alt="Ilam Kalvi Logo">
+</div>
+                <h1>Mathy — Practice</h1>
+                <p>A Quick Math Drills By "Ilam Kalvi" </p>
+            </div>
+
+            <div class="operations">
+                <div class="operation" data-op="1">1 • Addition</div>
+                <div class="operation" data-op="2">2 • Subtraction</div>
+                <div class="operation" data-op="3">3 • Multiplication</div>
+                <div class="operation" data-op="4">4 • Division</div>
+                <div class="operation" data-op="5">5 • Roots</div>
+                <div class="operation" data-op="6">6 • Power</div>
+                <div class="operation" data-op="7">7 • Percentage</div>
+            </div>
+
+            <div class="digits">
+                <h3>Choose digits / power / root</h3>
+                <div class="digit" data-digit="2">2</div>
+                <div class="digit" data-digit="3">3</div>
+                <div class="digit" data-digit="4">4</div>
+            </div>
+
+            <div class="perfect-imperfect">
+  <div>
+    <button class="btn perfect">Perfect</button>
+    <button class="btn imperfect">Imperfect</button>
+
+    <p style="margin: 20px 0; font-size: 0.9em; color: #666;">
+    <strong>Note:</strong>
+    <br>
+    <b>PERFECT</b> – The answer will be a whole number (no decimals).<br>
+    <b>IMPERFECT</b> – The answer will be a decimal number (not a whole number).
+</p>
+  </div>
+</div>
+
+
+            <div>
+                <button class="btn" id="start">Start</button>
+                <button class="btn" id="home">Home</button>
+            </div>
+
+  
+<p class="tip">
+  <strong>Tip:</strong><br> Click <b>“Try Another”</b> to get a new question in the same format.<br>
+</p>
+        </div>
+
+        <div class="header1" id="headerBox" style="display:none;">
+            <div class="logo">
+                <img src="E:\IBPS/Ilam Kalvi.png" alt="Ilam Kalvi Logo">
+            </div>
+            <h1>Mathy — Practice</h1>
+            <p>A Quick Math Drills By "Ilam Kalvi" 🎉</p>
+        </div>
+
+        <div class="question-box">
+
+            <div class="question">
+                <span id="num1">—</span>
+                <span id="operator">+</span>
+                <span id="num2">—</span>
+            </div>
+            <div>
+                <input type="text" class="answer-input" id="answer">
+            </div>
+            <div>
+                <button class="check" id="check">Check</button>
+            </div>
+            <div>
+                <button class="btn" id="try-another">Try Another</button>
+                <button class="btn" id="enter-home">Enter Home</button>
+            </div>
+            <div class="timer">⏱️ <span id="time">18s</span></div>
+            <div id="result"></div>
+        </div>
+
+        <div class="footer">
+             Made by an "Ilam Kalvi" 💜 — Insta @the_.riz
+        </div>
+    </div>
+
+    <script>
+
+       let currentOp = null;
+let currentDigit = null;
+let perfectMode = true;
+let timerInterval = null;
+let timeLeft = 18;
+let expectedAnswer = null;
+
+// Operation selection
+document.querySelectorAll('.operation').forEach(op => {
+    op.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.operation').forEach(o => o.classList.remove('selected'));
+        op.classList.add('selected');
+        currentOp = parseInt(op.dataset.op);
+        updatePerfectImperfectVisibility();
+    });
+});
+
+// Digit selection
+document.querySelectorAll('.digit').forEach(digit => {
+    digit.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.querySelectorAll('.digit').forEach(d => d.classList.remove('selected'));
+        digit.classList.add('selected');
+        currentDigit = parseInt(digit.dataset.digit);
+    });
+});
+
+// Perfect/Imperfect selection
+document.querySelector('.perfect').addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.querySelector('.perfect').classList.add('selected');
+    document.querySelector('.imperfect').classList.remove('selected');
+    perfectMode = true;
+});
+
+document.querySelector('.imperfect').addEventListener('click', (e) => {
+    e.stopPropagation();
+    document.querySelector('.imperfect').classList.add('selected');
+    document.querySelector('.perfect').classList.remove('selected');
+    perfectMode = false;
+});
+
+// Show/hide perfect-imperfect buttons
+function updatePerfectImperfectVisibility() {
+    const perfectImperfectDiv = document.querySelector('.perfect-imperfect');
+    perfectImperfectDiv.style.display = (currentOp === 5 || currentOp === 7) ? 'flex' : 'none';
+    if (currentOp === 5 || currentOp === 7) {
+        document.querySelector('.perfect').classList.add('selected');
+        document.querySelector('.imperfect').classList.remove('selected');
+        perfectMode = true;
+    }
+}
+
+// Generate random number with specified digits
+function getRandomNumber(digits) {
+    const min = Math.pow(10, digits - 1);
+    const max = Math.pow(10, digits) - 1;
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+// Generate perfect root
+function getPerfectRoot(root) {
+    const max = 1000;
+    const perfectNumbers = [];
+    for (let i = 1; i <= Math.floor(Math.pow(max, 1 / root)); i++) {
+        const power = Math.pow(i, root);
+        if (power <= max) {
+            perfectNumbers.push(power);
+        }
+    }
+    const num1 = perfectNumbers[Math.floor(Math.random() * perfectNumbers.length)];
+    const num2 = Math.pow(num1, 1 / root);
+    return [num1, num2];
+}
+
+// Generate imperfect root
+function getImperfectRoot(digits) {
+    return getRandomNumber(digits);
+}
+
+// Generate power
+function getPower(power) {
+    const base = getRandomNumber(2); // Limit base to 2 digits for simplicity
+    return [base, power, Math.pow(base, power)];
+}
+
+// Generate perfect percentage
+function getPerfectPercentage(digits) {
+    const minPercent = digits === 2 ? 10 : 100;
+    const maxPercent = digits === 2 ? 99 : 999;
+    const percent = Math.floor(Math.random() * (maxPercent - minPercent + 1)) + minPercent;
+    const possibleBases = [];
+    for (let base = 1; base <= 1000; base++) {
+        const result = (base * percent) / 100;
+        if (Number.isInteger(result) && result <= 10000) {
+            possibleBases.push(base);
+        }
+    }
+    const base = possibleBases[Math.floor(Math.random() * possibleBases.length)] || 100;
+    const result = (base * percent) / 100;
+    return [percent, base, result];
+}
+
+// Generate imperfect percentage
+function getImperfectPercentage(digits) {
+    const minPercent = digits === 2 ? 10 : 100;
+    const maxPercent = digits === 2 ? 99 : 999;
+    const percent = Math.floor(Math.random() * (maxPercent - minPercent + 1)) + minPercent;
+    const base = getRandomNumber(2); // Limit base to 2 digits
+    const result = (base * percent) / 100;
+    return [percent, base, result];
+}
+
+// Generate question
+function generateQuestion() {
+    if (!currentOp || !currentDigit) {
+        alert('Please select an operation and digit length');
+        return;
+    }
+
+    document.getElementById('homepage').classList.add('hidden');
+    document.querySelector('.question-box').style.display = 'block';
+    document.getElementById('headerBox').style.display = 'block';
+
+    const num1El = document.getElementById('num1');
+    const num2El = document.getElementById('num2');
+    const opEl = document.getElementById('operator');
+    let num1, num2, op;
+
+    if (currentOp === 5) { // Roots
+        if (perfectMode) {
+            [num1, expectedAnswer] = getPerfectRoot(currentDigit);
+            op = `${currentDigit}√`;
+            num1El.textContent = num1;
+            num2El.textContent = '';
+            opEl.textContent = op;
+        } else {
+            num1 = getImperfectRoot(currentDigit);
+            expectedAnswer = Math.pow(num1, 1 / currentDigit);
+            op = `${currentDigit}√`;
+            num1El.textContent = num1;
+            num2El.textContent = '';
+            opEl.textContent = op;
+        }
+    } else if (currentOp === 6) { // Power
+        [num1, num2, expectedAnswer] = getPower(currentDigit);
+        op = '^';
+        num1El.textContent = num1;
+        num2El.textContent = num2;
+        opEl.textContent = op;
+    } else if (currentOp === 7) { // Percentage
+        if (perfectMode) {
+            [num1, num2, expectedAnswer] = getPerfectPercentage(currentDigit);
+            op = '% of';
+            num1El.textContent = num1;
+            num2El.textContent = num2;
+            opEl.textContent = op;
+        } else {
+            [num1, num2, expectedAnswer] = getImperfectPercentage(currentDigit);
+            op = '% of';
+            num1El.textContent = num1;
+            num2El.textContent = num2;
+            opEl.textContent = op;
+        }
+    } else {
+        num1 = getRandomNumber(currentDigit);
+        num2 = getRandomNumber(currentOp === 4 ? currentDigit : currentDigit);
+        switch (currentOp) {
+            case 1: // Addition
+                op = '+';
+                expectedAnswer = num1 + num2;
+                break;
+            case 2: // Subtraction
+                op = '−';
+                // Ensure positive or zero result
+                if (num1 < num2) [num1, num2] = [num2, num1];
+                expectedAnswer = num1 - num2;
+                break;
+            case 3: // Multiplication
+                op = '×';
+                expectedAnswer = num1 * num2;
+                break;
+            case 4: // Division
+                expectedAnswer = num1;
+                num1 = num1 * num2; // num1 is the product, num2 is the divisor
+                op = '÷';
+                break;
+        }
+        num1El.textContent = num1;
+        num2El.textContent = num2;
+        opEl.textContent = op;
+    }
+
+    document.getElementById('answer').value = '';
+    document.getElementById('result').textContent = '';
+    startTimer();
+}
+
+// Start timer
+function startTimer() {
+    timeLeft = 18;
+    document.getElementById('time').textContent = `${timeLeft}s`;
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('time').textContent = `${timeLeft}s`;
+        if (timeLeft <= 0) {
+            clearInterval(timerInterval);
+            checkAnswer();
+        }
+    }, 1000);
+}
+
+// Check answer
+function checkAnswer() {
+    const answer = document.getElementById('answer').value;
+    const resultEl = document.getElementById('result');
+
+    if (answer === '') {
+        resultEl.style.color = 'orange';
+        resultEl.textContent = `Time's up! The correct answer is ${expectedAnswer.toFixed(2)}.`;
+        clearInterval(timerInterval);
+    } else if (Math.abs(parseFloat(answer) - expectedAnswer) < 0.01) {
+        resultEl.style.color = 'green';
+        resultEl.textContent = `${answer} is the correct answer!`;
+        clearInterval(timerInterval);
+    } else {
+        resultEl.style.color = 'red';
+        resultEl.textContent = `Wrong! The correct answer is ${expectedAnswer.toFixed(2)}.`;
+        clearInterval(timerInterval);
+    }
+}
+
+// Event listeners
+document.getElementById('start').addEventListener('click', generateQuestion);
+document.getElementById('check').addEventListener('click', checkAnswer);
+document.getElementById('try-another').addEventListener('click', generateQuestion);
+document.getElementById('home').addEventListener('click', () => {
+    document.querySelector('.question-box').style.display = 'none';
+    document.getElementById('headerBox').style.display = 'none';
+    document.getElementById('homepage').classList.remove('hidden');
+    clearInterval(timerInterval);
+});
+document.getElementById('enter-home').addEventListener('click', () => {
+    document.querySelector('.question-box').style.display = 'none';
+    document.getElementById('headerBox').style.display = 'none';
+    document.getElementById('homepage').classList.remove('hidden');
+    clearInterval(timerInterval);
+});
+
+updatePerfectImperfectVisibility();
+
+    </script>
+</body>
+</html>
