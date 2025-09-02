@@ -72,7 +72,7 @@ padding-left: 80px;
             background: linear-gradient(to bottom left,#3c1053, #ad5389, #3c1053);
             color: white;
 
-            padding: 15px;
+            padding: 20px;
             border-radius: 19px;
             margin-bottom: 0px;
         }
@@ -103,13 +103,7 @@ padding-left: 80px;
             gap: 12px;
         }
 
-.digits {
-            margin: 20px 0;
-            display: flex;
-            flex-wrap: nowrap;
-            justify-content: center;
-            gap: 12px;
-        }
+
 
 
         .operation {
@@ -123,17 +117,34 @@ padding-left: 80px;
             user-select: none;
         }
 
-.digit {
-            padding: 20px 20px;
-            border-radius: 10px;
-            border:1px solid rgba(124,108,255,0.5);            
-            cursor: pointer;
-            background: #fff;
-            transition: all 0.3s ease;
-            font-size: 1em;
-            user-select: none;
+.digit-section {
+            margin: 10px 0;
 
-        }
+  display: flex;
+  align-items: center;   /* vertically centers h3 with the digits */
+  justify-content: center;  /* keeps everything centered */
+  gap: 12px;  /* space between heading and digit boxes */
+}
+
+.digits {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 12px;
+}
+
+.digit {
+  padding: 10px 15px;  /* same as operation buttons */
+  border-radius: 10px;
+  border: 1px solid rgba(124,108,255,0.5);
+  cursor: pointer;
+  background: #fff;
+  transition: all 0.3s ease;
+  font-size: 1em;
+  user-select: none;
+}
+
+
+
 
         .operation:hover, .digit:hover {
         background:linear-gradient(45deg,rgba(124,108,255,0.10),
@@ -279,7 +290,7 @@ padding-left: 80px;
         <div id="homepage">
             <div class="header">
                 <div class="logo">
-<img src="Ilam Kalvi.png" alt="Ilam Kalvi Logo">
+    <img src="E:\IBPS/Ilam Kalvi.png" alt="Ilam Kalvi Logo">
 </div>
                 <h1>Mathy — Practice</h1>
                 <p>A Quick Math Drills By "Ilam Kalvi" </p>
@@ -295,12 +306,15 @@ padding-left: 80px;
                 <div class="operation" data-op="7">7 • Percentage</div>
             </div>
 
-            <div class="digits">
-                <h3>Choose digits / power / root</h3>
-                <div class="digit" data-digit="2">2</div>
-                <div class="digit" data-digit="3">3</div>
-                <div class="digit" data-digit="4">4</div>
-            </div>
+                <div class="digit-section">
+  <h3>Choose digits / power / root</h3>
+  <div class="digits">
+    <div class="digit" data-digit="2">2</div>
+    <div class="digit" data-digit="3">3</div>
+    <div class="digit" data-digit="4">4</div>
+  </div>
+</div>
+
 
             <div class="perfect-imperfect">
   <div>
@@ -620,5 +634,3 @@ updatePerfectImperfectVisibility();
     </script>
 </body>
 </html>
-
-
