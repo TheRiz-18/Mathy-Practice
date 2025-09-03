@@ -199,6 +199,25 @@
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
+#back {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--primary-color);
+            padding: 0.5rem 1rem;
+            background-color: var(--secondary-color);
+            border-radius: 1rem;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+
+.back a {
+  text-decoration: none;
+color: #6a0572;
+}
+
         /* Modal Styles */
         .modal {
             display: none;
@@ -272,7 +291,7 @@
         }
 
 
-@media (max-width: 1080px) {
+@media (max-width: 600px) {
         .container {
             padding: 1.5rem 1rem;
             max-width: 90%;
@@ -326,7 +345,6 @@
             padding: 0.2rem 0.6rem;
         }
 
-
         /* Modal adjustments */
         .modal-content {
             padding: 1.5rem;
@@ -354,6 +372,7 @@
         <div id="timer" style="display: none;">5</div>
         <h1>Math Quiz 🧠</h1>
 
+
         <div class="splash-screen" id="splash-screen">
             <p>Can We Start The Tables Quiz?</p>
             <button id="start-button">Let's Start</button>
@@ -361,6 +380,9 @@
 
         <div class="quiz-screen" id="quiz-screen">
             <div class="question-box">
+<div class="back" id="back">
+<a href="index.html">↩</a>
+        </div>
                 <div id="question"></div>
             </div>
             <div id="result-message"></div>
@@ -385,6 +407,7 @@
         <div class="modal-content">
             <h2 id="modal-heading"></h2>
             <p id="modal-text"></p>
+<button id="back-to-home">Main</button>
             <button id="modal-next-btn">Try Another</button>
         </div>
     </div>
@@ -517,9 +540,10 @@ modalNextBtn.addEventListener('click', () => {
     resultModal.style.display = 'none';
     generateQuestion();
 });
-
+document.getElementById('back-to-home').addEventListener('click', () => {
+    window.location.href = "index.html";
+});
 
     </script>
 </body>
 </html>
-
