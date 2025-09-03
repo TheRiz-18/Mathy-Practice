@@ -363,8 +363,7 @@ padding-left: 70px;
 
 
             <div>
-                <button class="btn" id="start">Start</button>
-                <button class="btn" id="home">Home</button>
+                <button class="btn" id="start"><b>Solve</b></button>
             </div>
 
   
@@ -647,12 +646,7 @@ function checkAnswer() {
 document.getElementById('start').addEventListener('click', generateQuestion);
 document.getElementById('check').addEventListener('click', checkAnswer);
 document.getElementById('try-another').addEventListener('click', generateQuestion);
-document.getElementById('home').addEventListener('click', () => {
-    document.querySelector('.question-box').style.display = 'none';
-    document.getElementById('headerBox').style.display = 'none';
-    document.getElementById('homepage').classList.remove('hidden');
-    clearInterval(timerInterval);
-});
+
 document.getElementById('enter-home').addEventListener('click', () => {
     document.querySelector('.question-box').style.display = 'none';
     document.getElementById('headerBox').style.display = 'none';
@@ -665,7 +659,6 @@ updatePerfectImperfectVisibility();
     </script>
 </body>
 </html>
-
 
 
 
