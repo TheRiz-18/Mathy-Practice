@@ -271,6 +271,81 @@
             background-color: #55045a;
         }
 
+
+@media (max-width: 1080px) {
+        .container {
+            padding: 1.5rem 1rem;
+            max-width: 90%;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+        }
+
+        .splash-screen p {
+            font-size: 1.2rem;
+            margin-bottom: 1.2rem;
+        }
+
+        #start-button {
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+        }
+
+        .question-box {
+            padding: 1rem;
+        }
+
+        #question {
+            font-size: 1.8rem;
+            flex-wrap: wrap;
+            text-align: center;
+        }
+
+        #question .answer-placeholder {
+            min-width: 40px;
+        }
+
+        .keypad {
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.5rem;
+        }
+
+        .keypad button {
+            font-size: 1.2rem;
+            padding: 1rem;
+        }
+
+        #next-question-btn {
+            font-size: 1rem;
+            padding: 0.6rem 1.2rem;
+        }
+
+        #timer {
+            font-size: 1rem;
+            padding: 0.3rem 0.8rem;
+        }
+
+        /* Modal adjustments */
+        .modal-content {
+            padding: 1.5rem;
+            max-width: 90%;
+        }
+
+        .modal-content h2 {
+            font-size: 1.5rem;
+        }
+
+        .modal-content p {
+            font-size: 1rem;
+        }
+
+        .modal-content button {
+            font-size: 1rem;
+            padding: 0.6rem 1.2rem;
+        }
+    }
+
     </style>
 </head>
 <body>
@@ -301,9 +376,7 @@
                 <button class="keypad-button">0</button>
                 <button class="key-del" id="key-del">DEL</button>
             </div>
-            <div class="controls">
-                <button id="next-question-btn">Try Another</button>
-            </div>
+ 
         </div>
     </div>
 
@@ -317,139 +390,133 @@
 
     <script>
         const splashScreen = document.getElementById('splash-screen');
-        const startButton = document.getElementById('start-button');
-        const quizScreen = document.getElementById('quiz-screen');
-        const questionEl = document.getElementById('question');
-        const resultMessageEl = document.getElementById('result-message');
-        const keypadButtons = document.querySelectorAll('.keypad-button');
-        const delButton = document.getElementById('key-del');
-        const nextButton = document.getElementById('next-question-btn');
-        const timerEl = document.getElementById('timer');
-        
-        const resultModal = document.getElementById('resultModal');
-        const modalHeading = document.getElementById('modal-heading');
-        const modalText = document.getElementById('modal-text');
-        const modalNextBtn = document.getElementById('modal-next-btn');
+const startButton = document.getElementById('start-button');
+const quizScreen = document.getElementById('quiz-screen');
+const questionEl = document.getElementById('question');
+const resultMessageEl = document.getElementById('result-message');
+const keypadButtons = document.querySelectorAll('.keypad-button');
+const delButton = document.getElementById('key-del');
+const timerEl = document.getElementById('timer');
 
-        let num1, num2, correctResult;
-        let userInput = '';
-        let timer;
-        let countdownInterval;
-        const timeLimit = 5;
-        let answered = false;
+const resultModal = document.getElementById('resultModal');
+const modalHeading = document.getElementById('modal-heading');
+const modalText = document.getElementById('modal-text');
+const modalNextBtn = document.getElementById('modal-next-btn');
 
-        function generateQuestion() {
-            clearTimeout(timer);
-            clearInterval(countdownInterval);
-            answered = false;
-            num1 = Math.floor(Math.random() * 10) + 1;
-            num2 = Math.floor(Math.random() * 10) + 1;
-            correctResult = num1 * num2;
-            questionEl.innerHTML = `${num1} &times; ${num2} = <span class="answer-placeholder"></span>`;
-            userInput = '';
-            resultMessageEl.textContent = '';
-            startTimer();
-        }
+let num1, num2, correctResult;
+let userInput = '';
+let timer;
+let countdownInterval;
+const timeLimit = 5;
+let answered = false;
 
-        function checkAnswer() {
-            if (answered) return;
-            answered = true;
-            clearTimeout(timer);
-            clearInterval(countdownInterval);
-            timerEl.textContent = '5'; // Reset timer display
-            
-            const enteredValue = parseInt(userInput);
-            let heading, message, className;
+function generateQuestion() {
+    clearTimeout(timer);
+    clearInterval(countdownInterval);
+    answered = false;
+    num1 = Math.floor(Math.random() * 10) + 1;
+    num2 = Math.floor(Math.random() * 10) + 1;
+    correctResult = num1 * num2;
+    questionEl.innerHTML = `${num1} &times; ${num2} = <span class="answer-placeholder"></span>`;
+    userInput = '';
+    resultMessageEl.textContent = '';
+    startTimer();
+}
 
-            if (enteredValue === correctResult) {
-                heading = 'Correct!';
-                message = `You got it right! ${num1} x ${num2} = ${correctResult}.`;
-                className = 'correct';
-            } else if (userInput === '') {
-                heading = 'Time\'s Up!';
-                message = `You didn't answer in time. The correct answer is ${correctResult}.`;
-                className = 'times-up';
-            } else {
-                heading = 'Wrong Answer!';
-                message = `Your answer was ${enteredValue}. The correct answer is ${correctResult}.`;
-                className = 'wrong';
-            }
-            
-            showModal(heading, message, className);
-        }
+function checkAnswer() {
+    if (answered) return;
+    answered = true;
+    clearTimeout(timer);
+    clearInterval(countdownInterval);
+    timerEl.textContent = '5'; // Reset timer display
+    
+    const enteredValue = parseInt(userInput);
+    let heading, message, className;
 
-        function showModal(heading, message, className) {
-            modalHeading.textContent = heading;
-            modalText.textContent = message;
-            modalHeading.className = className;
-            resultModal.style.display = 'flex';
-        }
+    if (enteredValue === correctResult) {
+        heading = 'Correct!';
+        message = `You got it right! ${num1} x ${num2} = ${correctResult}.`;
+        className = 'correct';
+    } else if (userInput === '') {
+        heading = 'Time\'s Up!';
+        message = `You didn't answer in time. The correct answer is ${correctResult}.`;
+        className = 'times-up';
+    } else {
+        heading = 'Wrong Answer!';
+        message = `Your answer was ${enteredValue}. The correct answer is ${correctResult}.`;
+        className = 'wrong';
+    }
+    
+    showModal(heading, message, className);
+}
 
-        function updateAnswerDisplay() {
-            const answerDisplay = document.querySelector('.answer-placeholder');
-            if (answerDisplay) {
-                answerDisplay.innerHTML = `<span class="entered-number">${userInput}</span>`;
-            }
-        }
+function showModal(heading, message, className) {
+    modalHeading.textContent = heading;
+    modalText.textContent = message;
+    modalHeading.className = className;
+    resultModal.style.display = 'flex';
+}
 
-        function startTimer() {
-            let timeLeft = timeLimit;
+function updateAnswerDisplay() {
+    const answerDisplay = document.querySelector('.answer-placeholder');
+    if (answerDisplay) {
+        answerDisplay.innerHTML = `<span class="entered-number">${userInput}</span>`;
+    }
+}
+
+function startTimer() {
+    let timeLeft = timeLimit;
+    timerEl.textContent = timeLeft;
+    timerEl.style.color = 'var(--primary-color)';
+    
+    countdownInterval = setInterval(() => {
+        timeLeft--;
+        if (timeLeft >= 0) {
             timerEl.textContent = timeLeft;
-            timerEl.style.color = 'var(--primary-color)';
-            
-            countdownInterval = setInterval(() => {
-                timeLeft--;
-                if (timeLeft >= 0) {
-                    timerEl.textContent = timeLeft;
-                }
-            }, 1000);
+        }
+    }, 1000);
 
-            timer = setTimeout(() => {
+    timer = setTimeout(() => {
+        checkAnswer();
+        timerEl.textContent = 'Time Up!';
+        timerEl.style.color = 'var(--wrong-color)';
+        clearInterval(countdownInterval);
+    }, timeLimit * 1000);
+}
+
+function showQuizScreen() {
+    splashScreen.style.display = 'none';
+    quizScreen.style.display = 'flex';
+    timerEl.style.display = 'block';
+    generateQuestion();
+}
+
+startButton.addEventListener('click', showQuizScreen);
+
+keypadButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (!answered) {
+            userInput += button.textContent;
+            updateAnswerDisplay();
+            if (userInput.length === String(correctResult).length || userInput.length >= 3) {
                 checkAnswer();
-                timerEl.textContent = 'Time Up!';
-                timerEl.style.color = 'var(--wrong-color)';
-                clearInterval(countdownInterval);
-            }, timeLimit * 1000);
-        }
-
-        function showQuizScreen() {
-            splashScreen.style.display = 'none';
-            quizScreen.style.display = 'flex';
-            timerEl.style.display = 'block';
-            generateQuestion();
-        }
-
-        startButton.addEventListener('click', showQuizScreen);
-
-        keypadButtons.forEach(button => {
-            button.addEventListener('click', () => {
-                if (!answered) {
-                    userInput += button.textContent;
-                    updateAnswerDisplay();
-                    if (userInput.length === String(correctResult).length || userInput.length >= 3) {
-                        checkAnswer();
-                    }
-                }
-            });
-        });
-
-        delButton.addEventListener('click', () => {
-            if (!answered) {
-                userInput = userInput.slice(0, -1);
-                updateAnswerDisplay();
             }
-        });
+        }
+    });
+});
 
-        nextButton.addEventListener('click', () => {
-            if (answered) {
-                generateQuestion();
-            }
-        });
+delButton.addEventListener('click', () => {
+    if (!answered) {
+        userInput = userInput.slice(0, -1);
+        updateAnswerDisplay();
+    }
+});
 
-        modalNextBtn.addEventListener('click', () => {
-            resultModal.style.display = 'none';
-            generateQuestion();
-        });
+modalNextBtn.addEventListener('click', () => {
+    resultModal.style.display = 'none';
+    generateQuestion();
+});
+
 
     </script>
 </body>
