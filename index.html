@@ -24,7 +24,7 @@
             text-align: center;
             position: relative;
         }
-        .header {
+        .header, .header1 {
             background: linear-gradient(to bottom left,#3c1053, #ad5389, #3c1053);
             color: white;
 
@@ -34,7 +34,7 @@
         }
         .logo {
     position: absolute;
-    top: 20px;
+    top: 18px;
     left: 20px;
     width: 91px; 
     height: 91px; 
@@ -68,21 +68,14 @@ padding-left: 80px;
 
         }
 
-.header1 {
-            background: linear-gradient(to bottom left,#3c1053, #ad5389, #3c1053);
-            color: white;
 
-            padding: 20px;
-            border-radius: 19px;
-            margin-bottom: 0px;
-        }
                 .header1 h1 {
             font-size: 1.8em;
     text-align: left;
 padding-left: 80px;
             margin: 0;
             text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
-            font-family: asimovian;
+            font-family: 'asimovian';
 
         }
         .header1 p {
@@ -120,15 +113,20 @@ padding-left: 80px;
 .digit-section {
             margin: 10px 0;
 
-  display: flex;
+  display: block;
   align-items: center;   /* vertically centers h3 with the digits */
+  font-size: 1em;
+
   justify-content: center;  /* keeps everything centered */
   gap: 12px;  /* space between heading and digit boxes */
 }
 
 .digits {
   display: flex;
-  flex-wrap: nowrap;
+  font-size: 1em;
+  justify-content: center;  /* keeps everything centered */
+
+  flex-wrap: wrap;
   gap: 12px;
 }
 
@@ -160,10 +158,9 @@ padding-left: 80px;
 
              .check {
             padding: 10px 15px;
-            border-radius: 10px;
             cursor: pointer;
-        background:linear-gradient(45deg,rgba(124,108,255,0.10),
-        rgba(255,122,182,0.10));
+        background:linear-gradient(45deg,rgba(124,108,255,0.20),
+        rgba(255,122,182,0.20));
         border:1px solid rgba(124,108,255,0.60);            transition: all 0.3s ease;
             font-size: 1em;
             user-select: none;
@@ -198,7 +195,7 @@ padding-left: 80px;
             color: black;
             font-size: 1em;
             transition: all 0.3s ease;
-            margin: 5px;
+            margin: 15px;
         }
         .btn:hover {
             background: #8e66cc;
@@ -206,6 +203,8 @@ padding-left: 80px;
             transform: scale(1.05);
         }
         .perfect-imperfect .btn {
+  padding: 10px 15px;  /* same as operation buttons */
+
             background: white;
             border: 1px solid rgba(124, 108, 255, 0.50); 
             color: #b388ff;
@@ -232,12 +231,12 @@ padding-left: 80px;
             font-size: 1.5em;
             margin: 15px 0;
         }
-        .answer-input {
+        .answer-input, .answer-input seelected  {
             padding: 10px;
             font-size: 1em;
             margin: 15px;
             width: 120px;
-            border: 2px solid #b388ff;
+        border:1px solid rgba(124,108,255,0.60);           
             border-radius: 10px;
             text-align: center;
         }
@@ -264,12 +263,38 @@ padding-left: 80px;
                 width: 95%;
                 padding: 15px;
             }
+.header, .header1 {
+            background: linear-gradient(to bottom left,#3c1053, #ad5389, #3c1053);
+            color: white;
+
+            padding: 15px;
+            border-radius: 19px;
+            margin-bottom: 0px;
+        }
             .header h1, .header1 h1 {
-                font-size: 1.2em;
-            }
-            .header p, .header1 p {
-                font-size: 0.5em;
-            }
+            font-size: 1.2em;
+    text-align: left;
+padding-left: 70px;
+            margin: 0;
+            text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
+            font-family: asimovian;
+
+        }
+
+
+        .header1 p, .header p {
+            margin: 1px 0;
+            padding: 5px;
+
+    text-align: left;
+padding-left: 70px;
+            font-size: 0.7em;
+            font-family: Dancing Script;
+
+        }
+
+
+
             .operation, .digit, .btn {
                 padding: 8px 12px;
                 font-size: 0.9em;
@@ -278,7 +303,7 @@ padding-left: 80px;
                 width: 100px;
             }
             .logo {
-                top: 12px;
+                top: 13px;
     left: 20px;
     width: 78px; 
     height: 78px; 
@@ -300,6 +325,7 @@ padding-left: 80px;
                 <h1>Mathy — Practice</h1>
                 <p>A Quick Math Drills By "Ilam Kalvi" </p>
             </div>
+<p> Choose the Operation : </p>
 
             <div class="operations">
                 <div class="operation" data-op="1">1 • Addition</div>
@@ -312,7 +338,7 @@ padding-left: 80px;
             </div>
 
                 <div class="digit-section">
-  <h3>Choose digits / power / root</h3>
+  <p>Choose [Digits / Power / Root] :</p>
   <div class="digits">
     <div class="digit" data-digit="2">2</div>
     <div class="digit" data-digit="3">3</div>
@@ -349,10 +375,10 @@ padding-left: 80px;
 
         <div class="header1" id="headerBox" style="display:none;">
             <div class="logo">
-                <img src=Ilam Kalvi.png alt="Ilam Kalvi Logo">
+                <img src="Ilam Kalvi.png" alt="Ilam Kalvi Logo">
             </div>
             <h1>Mathy — Practice</h1>
-            <p>A Quick Math Drills By "Ilam Kalvi" 🎉</p>
+            <p>A Quick Math Drills By "Ilam Kalvi"</p>
         </div>
 
         <div class="question-box">
@@ -377,7 +403,7 @@ padding-left: 80px;
         </div>
 
         <div class="footer">
-             Made by an "Ilam Kalvi" 💜 — Insta @the_.riz
+             Made by an "Ilam Kalvi" 💜 — <b>Insta @the_.riz</b>
         </div>
     </div>
 
@@ -639,7 +665,6 @@ updatePerfectImperfectVisibility();
     </script>
 </body>
 </html>
-
 
 
 
