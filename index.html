@@ -421,13 +421,16 @@ document.querySelectorAll('.keypad-btn').forEach(btn => {
         const currentValue = answerInput.value;
 
         // Check if adding a digit would exceed the max allowed length
-        let expectedStr;
-        if (currentOp === 5 && !perfectMode) {
-            expectedStr = expectedAnswer.toFixed(2);
-        } else {
-            expectedStr = expectedAnswer.toFixed(0);
-        }
-        maxAnswerLength = expectedStr.length;
+let expectedStr;
+if (currentOp === 5 && !perfectMode) {
+    expectedStr = expectedAnswer.toFixed(2); // roots with decimals
+} else if (currentOp === 7 && !perfectMode) {
+    expectedStr = expectedAnswer.toFixed(2); // imperfect percentages with decimals
+} else {
+    expectedStr = expectedAnswer.toString(); // keep integers clean
+}
+maxAnswerLength = expectedStr.length;
+
 
         if (value === 'del') {
     if (startPos > 0) {
@@ -518,16 +521,18 @@ function getPower(power) {
 
 // Generate perfect percentage
 function getPerfectPercentage(digits) {
-    const minPercent = digits === 2 ? 10 : 100;
-    const maxPercent = digits === 2 ? 99 : 999;
+    const minPercent = Math.pow(10, digits - 1);   // 10, 100, 1000...
+    const maxPercent = Math.pow(10, digits) - 1;   // 99, 999, 9999...
     const percent = Math.floor(Math.random() * (maxPercent - minPercent + 1)) + minPercent;
+
     const possibleBases = [];
-    for (let base = 10; base <= 1000; base++) {
+    for (let base = 10; base <= 2000; base++) { // allow bigger bases
         const result = (base * percent) / 100;
         if (Number.isInteger(result) && result > 0) {
             possibleBases.push(base);
         }
     }
+
     const base = possibleBases[Math.floor(Math.random() * possibleBases.length)] || 100;
     const result = (base * percent) / 100;
     return [percent, base, result];
@@ -535,13 +540,19 @@ function getPerfectPercentage(digits) {
 
 // Generate imperfect percentage
 function getImperfectPercentage(digits) {
-    const minPercent = digits === 2 ? 10 : 100;
-    const maxPercent = digits === 2 ? 99 : 999;
+    const minPercent = Math.pow(10, digits - 1);
+    const maxPercent = Math.pow(10, digits) - 1;
     const percent = Math.floor(Math.random() * (maxPercent - minPercent + 1)) + minPercent;
-    const base = getRandomNumber(2);
+    const base = getRandomNumber(3); // 3-digit base for variety
     const result = (base * percent) / 100;
     return [percent, base, result];
 }
+
+function formatAnswer(ans) {
+    return Number.isInteger(ans) ? ans.toString() : ans.toFixed(2);
+}
+
+
 
 // Generate question
 function generateQuestion() {
@@ -576,6 +587,7 @@ function generateQuestion() {
     break;
 
         case 6: // Power
+    case 6: // Power
     [num1, num2, expectedAnswer] = getPower(currentDigit);
     expectedAnswer = Math.round(expectedAnswer); // force clean integer
     op = '^';
@@ -583,6 +595,7 @@ function generateQuestion() {
     num2El.textContent = num2;
     opEl.textContent = op;
     break;
+
 
         case 7: // Percentage
             if (perfectMode) {
@@ -652,7 +665,7 @@ function checkAnswer() {
 
     if (answer === '') {
         resultEl.style.color = 'orange';
-        resultEl.textContent = `Time's up! The correct answer is ${perfectMode ? expectedAnswer.toFixed(0) : expectedAnswer.toFixed(2)}.`;
+        resultEl.textContent = `Time's up! The correct answer is ${formatAnswer(expectedAnswer)}.`;
         clearInterval(timerInterval);
     } else if (Math.abs(parseFloat(answer) - expectedAnswer) < 0.01) {
         resultEl.style.color = 'green';
@@ -660,10 +673,11 @@ function checkAnswer() {
         clearInterval(timerInterval);
     } else {
         resultEl.style.color = 'red';
-        resultEl.textContent = `Wrong! The correct answer is ${perfectMode ? expectedAnswer.toFixed(0) : expectedAnswer.toFixed(2)}.`;
+        resultEl.textContent = `Wrong! The correct answer is ${formatAnswer(expectedAnswer)}.`;
         clearInterval(timerInterval);
     }
 }
+
 
 // Event listeners
 document.getElementById('start').addEventListener('click', generateQuestion);
