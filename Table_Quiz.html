@@ -345,16 +345,6 @@ color: #6a0572;
             padding: 0.2rem 0.6rem;
         }
 
-    #back {
-            font-size: 0.9rem;
-            padding: 0.2rem 0.6rem;
-        }
-
-
-.back a {
-  text-decoration: none;
-color: #6a0572;
-}
         /* Modal adjustments */
         .modal-content {
             padding: 1.5rem;
@@ -380,11 +370,17 @@ color: #6a0572;
 <body>
     <div class="container">
         <div id="timer" style="display: none;">5</div>
+<div class="back" id="back">
+<a href="index.html"><b><</b></a>
+        </div>
+
         <h1>Math Quiz 🧠</h1>
 
 
         <div class="splash-screen" id="splash-screen">
-            <p>Can We Start The Tables Quiz?</p>
+<p>Can We Start <br>
+The "4-9" Tables Quiz?</p>
+
             <button id="start-button">Let's Start</button>
         </div>
 
@@ -448,14 +444,17 @@ function generateQuestion() {
     clearTimeout(timer);
     clearInterval(countdownInterval);
     answered = false;
-    num1 = Math.floor(Math.random() * 10) + 1;
-    num2 = Math.floor(Math.random() * 10) + 1;
+
+    num1 = Math.floor(Math.random() * 6) + 4; // 4 to 9
+    num2 = Math.floor(Math.random() * 6) + 4; // 4 to 9
     correctResult = num1 * num2;
+
     questionEl.innerHTML = `${num1} &times; ${num2} = <span class="answer-placeholder"></span>`;
     userInput = '';
     resultMessageEl.textContent = '';
     startTimer();
 }
+
 
 function checkAnswer() {
     if (answered) return;
@@ -557,7 +556,3 @@ document.getElementById('back-to-home').addEventListener('click', () => {
     </script>
 </body>
 </html>
-
-
-
-
