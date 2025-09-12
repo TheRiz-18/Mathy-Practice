@@ -576,12 +576,14 @@ function generateQuestion() {
     break;
 
         case 6: // Power
-            [num1, num2, expectedAnswer] = getPower(currentDigit);
-            op = '^';
-            num1El.textContent = num1;
-            num2El.textContent = num2;
-            opEl.textContent = op;
-            break;
+    [num1, num2, expectedAnswer] = getPower(currentDigit);
+    expectedAnswer = Math.round(expectedAnswer); // force clean integer
+    op = '^';
+    num1El.textContent = num1;
+    num2El.textContent = num2;
+    opEl.textContent = op;
+    break;
+
         case 7: // Percentage
             if (perfectMode) {
                 [num1, num2, expectedAnswer] = getPerfectPercentage(currentDigit);
