@@ -561,18 +561,20 @@ function generateQuestion() {
 
     switch (currentOp) {
         case 5: // Roots
-            if (perfectMode) {
-                [num1, expectedAnswer] = getPerfectRoot(currentDigit);
-                op = `${currentDigit}√`;
-            } else {
-                num1 = getImperfectRoot(currentDigit);
-                expectedAnswer = Math.pow(num1, 1 / currentDigit);
-                op = `${currentDigit}√`;
-            }
-            num1El.textContent = num1;
-            num2El.textContent = '';
-            opEl.textContent = op;
-            break;
+    if (perfectMode) {
+        [num1, expectedAnswer] = getPerfectRoot(currentDigit);
+    } else {
+        num1 = getImperfectRoot(currentDigit);
+        expectedAnswer = Math.pow(num1, 1 / currentDigit);
+    }
+
+    // Build "2√49"
+    op = `${currentDigit}√`;
+    num2El.textContent = num1;   // show number after the root
+    num1El.textContent = '';     // nothing before root
+    opEl.textContent = op;
+    break;
+
         case 6: // Power
             [num1, num2, expectedAnswer] = getPower(currentDigit);
             op = '^';
